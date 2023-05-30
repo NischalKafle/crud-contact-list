@@ -16,8 +16,6 @@ function Add() {
 
   const handleAddContact = () => {
     const newContact = {
-      
-
       id: rand ,
       name,
       email,
@@ -30,9 +28,9 @@ function Add() {
   };
 
   return (
-    <>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', textAlign: 'center' }}>
-        <div style={{ border: '2px black solid' }}>
+    
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center',height:'100vh', textAlign: 'center',width:'100%' }}>
+        <div style={{ border: '2px black solid' ,width:'100%'}}>
           <form>
             <div className="form-group">
               <label htmlFor="name" className="form-label">
@@ -66,7 +64,7 @@ function Add() {
           </form>
         </div>
       </div>
-    </>
+    
   );
 }
 

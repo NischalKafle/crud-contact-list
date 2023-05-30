@@ -1,27 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { editEmail } from '../redux/contactSlice';
+import { useNavigate,useParams } from 'react-router-dom';
 
 function Edit() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
+  const [email, setEmail] = useState('');
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+
+    // Dispatch editEmail action with the updated email value
+    dispatch(editEmail({ id: parseInt(id), email: email })); // Replace 123 with the actual contact ID
+
+    // Clear the email input
+    setEmail('');
+    navigate('/');
+  };
+
   return (
-    <div style={{display:'flex',alignItems:'center',justifyContent:'center',height: '100vh',textAlign:'center',}} >
-    <div style={{border:'2px black solid',}}>
-    <form >
-  
-  <div class="form-group">
-      <label for="exampleInputEmail1" class="form-label">Name </label>
-      <input type="text" style={{marginLeft:'500px',marginRight:'500px',width:'400px'}} name="name" class="form-control" aria-describedby="emailHelp" placeholder="Enter new name"/>
-
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', textAlign: 'center',width:'100%' }}>
+      <div style={{ border: '2px black solid',width:'100%' }}>
+        <form onSubmit={handleEdit}>
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              className="form-control"
+              aria-describedby="emailHelp"
+              placeholder="Enter new email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary" style={{ margin: '5px' }}>
+            Edit
+          </button>
+        </form>
+      </div>
     </div>
-  <div class="form-group">
-      <label for="exampleInputEmail1" class="form-label">Email </label>
-      <input type="email" style={{marginLeft:'500px',marginRight:'500px',width:'400px'}} name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter new email"/>
-
-    </div>
-   
-    <button type="submit" class="btn btn-primary" style={{margin:'5px'}}>Edit</button>
-  </form>
-  </div>
-  </div>
-  )
+  );
 }
 
-export default Edit
+export default Edit;

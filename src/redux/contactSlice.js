@@ -1,4 +1,4 @@
-import { createSlice ,createAsyncThunk} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
@@ -13,7 +13,7 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
 
 const contactSlice = createSlice({
   name: 'contact',
-  initialState: { value: [] },
+  initialState: { value: [], loading: false },
   reducers: {
     addContact: (state, action) => {
       state.value = [...state.value, action.payload];
@@ -45,16 +45,18 @@ const contactSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(fetchUsers.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
       state.value = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(fetchUsers.rejected, (state) => {
+      state.loading = false;
     });
   },
 });
 
- 
-  
-
-
-export const { addContact, editName, editEmail} = contactSlice.actions;
+export const { addContact, editName, editEmail, deleteContact } = contactSlice.actions;
 export default contactSlice.reducer;
-

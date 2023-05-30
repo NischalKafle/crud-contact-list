@@ -1,8 +1,6 @@
-import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import TableContent from './features/TableContent';
 import Edit from './features/Edit';
-import { useSelector } from 'react-redux';
 import Add from './features/Add';
 
 function App() {
