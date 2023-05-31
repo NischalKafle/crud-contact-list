@@ -12,10 +12,8 @@ function Edit() {
   const handleEdit = (e) => {
     e.preventDefault();
 
-    // Dispatch editEmail action with the updated email value
-    dispatch(editEmail({ id: parseInt(id), email: email })); // Replace 123 with the actual contact ID
+    dispatch(editEmail({ id: parseInt(id), email: email }));
 
-    // Clear the email input
     setEmail('');
     navigate('/');
   };
